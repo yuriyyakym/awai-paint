@@ -1,18 +1,21 @@
 import { FunctionComponent } from 'react';
 
 import { canvasElementState, draw, startDrawing, stopDrawing } from './state';
+import Tools from './modules/Tools';
 
 const App: FunctionComponent = () => {
   return (
-    <div className="App">
+    <div className="app">
       <canvas
         ref={canvasElementState.set}
-        width={500}
-        height={500}
+        width={800}
+        height={600}
         onMouseDown={startDrawing}
         onMouseMove={draw}
         onMouseUp={stopDrawing}
       />
+
+      <Tools />
     </div>
   );
 };

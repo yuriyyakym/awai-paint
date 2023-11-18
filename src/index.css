@@ -4,6 +4,12 @@ body {
 
 canvas {
   display: block;
-  margin: 0 auto;
   border: 1px dashed #333;
+}
+
+.app {
+  display: flex; 
+  flex-direction: column;
+  width: 800px;
+  margin: 0 auto;
 }
