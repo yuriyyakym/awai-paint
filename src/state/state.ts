@@ -9,7 +9,7 @@ const BACKGROUND_LAYER: Background = {
 
 export const canvasElementState = state<HTMLCanvasElement | null>(null);
 
-export const toolState = state<'line' | 'rectangle' | 'pencil'>('line');
+export const toolState = state<'line' | 'rectangle' | 'pencil'>('pencil');
 
 export const toolConfigState = state<{ color: string }>({ color: '#ff0000' });
 
