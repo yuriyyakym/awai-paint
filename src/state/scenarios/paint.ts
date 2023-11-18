@@ -2,7 +2,7 @@ import { scenario } from 'awai';
 
 import type { Layer } from '../../types';
 import { draw, startDrawing, stopDrawing } from '../actions';
-import { drawBackground, drawLine } from '../lib';
+import { drawCurve, drawLine, drawRectangle } from '../lib';
 import { canvasElementState, currentLayerState, layersState } from '../state';
 
 scenario(
@@ -24,13 +24,23 @@ scenario(
     const layers = [...layersState.get(), currentLayerState.get()].filter(Boolean) as Layer[];
 
     for (const layer of layers) {
-      switch (layer.type) {
-        case 'background':
-          drawBackground(context, layer);
-          break;
-        case 'line':
-          drawLine(context, layer);
-          break;
+      if (layer.type === 'background') {
+        drawRectangle(
+          context,
+          { x: 0, y: 0 },
+          { x: Number.MAX_SAFE_INTEGER, y: Number.MAX_SAFE_INTEGER },
+          { backgroundColor: layer.color },
+        );
+      }
+
+      if (layer.type === 'line') {
+        drawLine(context, layer.start, layer.end, { color: layer.color });
+        break;
+      }
+
+      if (layer.type === 'pencil') {
+        drawCurve(context, layer.points, { color: layer.color });
+        break;
       }
     }
   },

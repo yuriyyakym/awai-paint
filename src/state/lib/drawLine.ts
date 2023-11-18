@@ -1,13 +1,21 @@
-import { Line } from '../../types';
+import type { Point } from '../../types';
 
-const drawLine = (context: CanvasRenderingContext2D, line: Line): void => {
-  const { color, end, start } = line;
+type Config = {
+  color?: string;
+  lineWidth?: number;
+};
 
-  context.strokeStyle = color;
-  context.lineWidth = 2;
+const drawLine = (
+  context: CanvasRenderingContext2D,
+  startPoint: Point,
+  endPoint: Point,
+  config: Config,
+): void => {
+  context.strokeStyle = config.color || '#000';
+  context.lineWidth = config.lineWidth || 1;
   context.beginPath();
-  context.moveTo(start.x, start.y);
-  context.lineTo(end.x, end.y);
+  context.moveTo(startPoint.x, startPoint.y);
+  context.lineTo(endPoint.x, endPoint.y);
   context.stroke();
 };
 
