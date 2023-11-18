@@ -3,32 +3,50 @@ export interface Point {
   y: number;
 }
 
-export interface Background {
-  type: 'background';
-  name: string;
+export type ToolName = 'line' | 'background' | 'rectangle' | 'pencil';
+
+export interface BackgroundConfig {
   color: string;
+}
+
+export interface LineConfig {
+  color: string;
+  lineWidth: number;
+}
+
+export interface RectangleConfig {
+  color: string;
+  borderWidth: number;
+  borderColor: string;
+}
+
+export interface CurveConfig {
+  color: string;
+  lineWidth: number;
+}
+
+export interface Background {
+  tool: 'background';
+  config: BackgroundConfig;
 }
 
 export interface Line {
-  type: 'line';
-  name: string;
-  color: string;
-  start: Point;
-  end: Point;
+  tool: 'line';
+  config: LineConfig;
+  startPoint: Point;
+  endPoint: Point;
 }
 
 export interface Rectangle {
-  type: 'rectangle';
-  name: string;
-  color: string;
-  start: Point;
-  end: Point;
+  tool: 'rectangle';
+  config: RectangleConfig;
+  startPoint: Point;
+  endPoint: Point;
 }
 
 export interface Pencil {
-  type: 'pencil';
-  name: string;
-  color: string;
+  tool: 'pencil';
+  config: PencilConfig;
   points: Point[];
 }
 
