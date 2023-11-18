@@ -1,7 +1,6 @@
 import { scenario } from 'awai';
 
 import type { Layer } from '../../types';
-import { draw, startDrawing, stopDrawing } from '../actions';
 import { drawCurve, drawLine, drawRectangle } from '../lib';
 import { canvasElementState, currentLayerState, layersState } from '../state';
 
@@ -9,9 +8,8 @@ scenario(
   () =>
     Promise.race([
       canvasElementState.events.changed,
-      startDrawing.events.invoked,
-      draw.events.invoked,
-      stopDrawing.events.invoked,
+      currentLayerState.events.changed,
+      layersState.events.changed,
     ]),
   () => {
     const canvas = canvasElementState.get();
@@ -35,13 +33,11 @@ scenario(
 
       if (layer.type === 'line') {
         drawLine(context, layer.start, layer.end, { color: layer.color });
-        break;
       }
 
       if (layer.type === 'pencil') {
         drawCurve(context, layer.points, { color: layer.color });
-        break;
       }
     }
   },
-);
+).events.failed.then(console.log);
