@@ -1,22 +1,25 @@
 import { scenario } from 'awai';
 
+import type { CurveConfig, Pencil } from '../../types';
 import { draw, startDrawing, stopDrawing } from '../actions';
-import { currentLayerState, toolConfigState, toolState } from '../state';
 import { getEventPoint } from '../lib';
-import { Pencil } from '../../types';
+import { currentLayerState, toolState, toolsConfigsFamily } from '../state';
+
+const TOOL_NAME = 'pencil';
 
 scenario(startDrawing.events.invoked, async ({ arguments: [event] }) => {
   const tool = toolState.get();
 
-  if (tool !== 'pencil') {
+  if (tool !== TOOL_NAME) {
     return;
   }
 
+  const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as CurveConfig;
+
   currentLayerState.set({
-    type: 'pencil',
-    name: 'Pencil layer',
-    color: toolConfigState.get().color,
+    tool: TOOL_NAME,
     points: [getEventPoint(event)],
+    config,
   });
 
   const drawScenario = scenario(draw.events.invoked, ({ arguments: [event] }) => {

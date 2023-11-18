@@ -1,28 +1,32 @@
 import { scenario } from 'awai';
 
+import type { LineConfig } from '../../types';
 import { draw, startDrawing, stopDrawing } from '../actions';
-import { currentLayerState, toolConfigState, toolState } from '../state';
+import { currentLayerState, toolState, toolsConfigsFamily } from '../state';
 import { getEventPoint } from '../lib';
+
+const TOOL_NAME = 'line';
 
 scenario(startDrawing.events.invoked, async ({ arguments: [event] }) => {
   const tool = toolState.get();
 
-  if (tool !== 'line') {
+  if (tool !== TOOL_NAME) {
     return;
   }
 
+  const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as LineConfig;
+
   currentLayerState.set({
-    type: 'line',
-    name: 'Line layer',
-    color: toolConfigState.get().color,
-    start: getEventPoint(event),
-    end: getEventPoint(event),
+    tool: TOOL_NAME,
+    startPoint: getEventPoint(event),
+    endPoint: getEventPoint(event),
+    config,
   });
 
   const drawScenario = scenario(draw.events.invoked, ({ arguments: [event] }) => {
     currentLayerState.set((layer) => ({
       ...layer!,
-      end: getEventPoint(event),
+      endPoint: getEventPoint(event),
     }));
   });
 
