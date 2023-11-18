@@ -37,6 +37,11 @@ scenario(
         const { config, points } = layer;
         drawCurve(context, points, config);
       }
+
+      if (layer.tool === 'rectangle') {
+        const { config, endPoint, startPoint } = layer;
+        drawRectangle(context, startPoint, endPoint, config);
+      }
     }
   },
 );
