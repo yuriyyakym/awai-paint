@@ -1,0 +1,20 @@
+{
+  "setupTasks": [
+    {
+      "command": "yarn install",
+      "name": "Install"
+    }
+  ],
+  "tasks": {
+    "dev": {
+      "name": "dev",
+      "command": "yarn dev",
+      "runAtStart": true
+    },
+    "build": {
+      "name": "build",
+      "command": "bun build",
+      "runAtStart": false
+    }
+  }
+}
