@@ -10,7 +10,7 @@ export const DEFAULT_LINE_CONFIG: LineConfig = {
 };
 
 export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
-  borderColor: '#333',
+  borderColor: '#333333',
   borderWidth: 1,
   color: '#ddffff',
 };
