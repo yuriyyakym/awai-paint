@@ -19,3 +19,16 @@ canvas {
   display: flex;
   gap: 6px;
 }
+
+.config {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.config input {
+  box-sizing: border-box;
+  width: 60px;
+  margin-right: 6px;
+}

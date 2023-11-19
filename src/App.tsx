@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { canvasElementState, draw, startDrawing, stopDrawing } from './state';
+import Config from './modules/Config';
 import Tools from './modules/Tools';
 
 const App: FunctionComponent = () => {
@@ -16,6 +17,7 @@ const App: FunctionComponent = () => {
       />
 
       <Tools />
+      <Config />
     </div>
   );
 };

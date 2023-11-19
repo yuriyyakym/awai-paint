@@ -16,7 +16,7 @@ export const canvasElementState = state<HTMLCanvasElement | null>(null);
 
 export const toolState = state<'line' | 'rectangle' | 'pencil'>('pencil');
 
-export const toolsConfigsFamily = familyState((tool) => {
+export const toolsConfigsFamily = familyState((tool): Layer['config'] => {
   switch (tool as ToolName) {
     case 'background':
       return DEFAULT_BACKGROUND_CONFIG;
