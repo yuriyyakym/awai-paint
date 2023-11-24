@@ -1,6 +1,5 @@
 import { scenario } from 'awai';
 
-import type { LineConfig } from '../../types';
 import { draw, startDrawingLine, stopDrawing } from '../actions';
 import { currentLayerState, lineConfigState } from '../state';
 
