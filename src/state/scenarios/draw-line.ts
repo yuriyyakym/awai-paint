@@ -7,30 +7,36 @@ import { getEventPoint } from '../lib';
 
 const TOOL_NAME = 'line';
 
-scenario(startDrawing.events.invoked, async ({ arguments: [event] }) => {
-  const tool = toolState.get();
+scenario(
+  startDrawing.events.invoked,
+  async ({ arguments: [event] }) => {
+    const tool = toolState.get();
 
-  if (tool !== TOOL_NAME) {
-    return;
-  }
+    if (tool !== TOOL_NAME) {
+      return;
+    }
 
-  const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as LineConfig;
+    const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as LineConfig;
 
-  currentLayerState.set({
-    tool: TOOL_NAME,
-    startPoint: getEventPoint(event),
-    endPoint: getEventPoint(event),
-    config,
-  });
-
-  const drawScenario = scenario(draw.events.invoked, ({ arguments: [event] }) => {
-    currentLayerState.set((layer) => ({
-      ...layer!,
+    currentLayerState.set({
+      tool: TOOL_NAME,
+      startPoint: getEventPoint(event),
       endPoint: getEventPoint(event),
-    }));
-  });
+      config,
+    });
 
-  await stopDrawing.events.invoked;
+    const drawingScenario = scenario(
+      draw.events.invoked,
+      ({ arguments: [event] }) => {
+        currentLayerState.set((layer) => ({
+          ...layer!,
+          endPoint: getEventPoint(event),
+        }));
+      },
+      { repeatUntil: stopDrawing.events.invoked },
+    );
 
-  drawScenario.stop();
-});
+    await drawingScenario.events.expired;
+  },
+  { strategy: 'cyclic' },
+);
