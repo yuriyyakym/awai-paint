@@ -1,37 +1,27 @@
 import { scenario } from 'awai';
 
 import { RectangleConfig } from '../../types';
-import { draw, startDrawing, stopDrawing } from '../actions';
-import { getEventPoint } from '../lib';
-import { currentLayerState, toolState, toolsConfigsFamily } from '../state';
+import { draw, startDrawingRectangle, stopDrawing } from '../actions';
+import { currentLayerState, toolsConfigsFamily } from '../state';
 
 const TOOL_NAME = 'rectangle';
 
 scenario(
-  startDrawing.events.invoked,
-  async ({ arguments: [event] }) => {
-    const tool = toolState.get();
-
-    if (tool !== TOOL_NAME) {
-      return;
-    }
-
+  startDrawingRectangle.events.invoked,
+  async ({ arguments: [point] }) => {
     const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as RectangleConfig;
 
     currentLayerState.set({
       tool: TOOL_NAME,
-      startPoint: getEventPoint(event),
-      endPoint: getEventPoint(event),
+      startPoint: point,
+      endPoint: point,
       config,
     });
 
     const drawScenario = scenario(
       draw.events.invoked,
-      ({ arguments: [event] }) => {
-        currentLayerState.set((layer) => ({
-          ...layer!,
-          endPoint: getEventPoint(event),
-        }));
+      ({ arguments: [endPoint] }) => {
+        currentLayerState.set((layer) => ({ ...layer!, endPoint }));
       },
       { repeatUntil: stopDrawing.events.invoked },
     );

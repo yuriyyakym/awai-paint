@@ -1,35 +1,28 @@
 import { scenario } from 'awai';
 
 import type { CurveConfig, Pencil } from '../../types';
-import { draw, startDrawing, stopDrawing } from '../actions';
-import { getEventPoint } from '../lib';
-import { currentLayerState, toolState, toolsConfigsFamily } from '../state';
+import { draw, startDrawingPencil, stopDrawing } from '../actions';
+import { currentLayerState, toolsConfigsFamily } from '../state';
 
 const TOOL_NAME = 'pencil';
 
 scenario(
-  startDrawing.events.invoked,
-  async ({ arguments: [event] }) => {
-    const tool = toolState.get();
-
-    if (tool !== TOOL_NAME) {
-      return;
-    }
-
+  startDrawingPencil.events.invoked,
+  async ({ arguments: [point] }) => {
     const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as CurveConfig;
 
     currentLayerState.set({
       tool: TOOL_NAME,
-      points: [getEventPoint(event)],
+      points: [point],
       config,
     });
 
     const drawScenario = scenario(
       draw.events.invoked,
-      ({ arguments: [event] }) => {
+      ({ arguments: [point] }) => {
         currentLayerState.set((layer) => ({
           ...layer!,
-          points: [...(layer as Pencil).points, getEventPoint(event)],
+          points: [...(layer as Pencil).points, point],
         }));
       },
       { repeatUntil: stopDrawing.events.invoked },

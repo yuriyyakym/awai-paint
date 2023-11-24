@@ -1,14 +1,33 @@
 import { action } from 'awai';
-import type { MouseEvent } from 'react';
 
-import { Layer } from '../types';
+import { Layer, Point } from '../types';
 import { toolState, toolsConfigsFamily } from './state';
 
-export const startDrawing = action<[event: MouseEvent<HTMLCanvasElement>]>();
+export const startDrawingLine = action<[Point]>();
 
-export const draw = action<[event: MouseEvent<HTMLCanvasElement>]>();
+export const startDrawingPencil = action<[Point]>();
 
-export const stopDrawing = action<[event: MouseEvent<HTMLCanvasElement>]>();
+export const startDrawingRectangle = action<[Point]>();
+
+export const startDrawing = action((point: Point) => {
+  const tool = toolState.get();
+
+  if (tool === 'line') {
+    startDrawingLine(point);
+  }
+
+  if (tool === 'pencil') {
+    startDrawingPencil(point);
+  }
+
+  if (tool === 'rectangle') {
+    startDrawingRectangle(point);
+  }
+});
+
+export const draw = action<[point: Point]>();
+
+export const stopDrawing = action<[point: Point]>();
 
 export const selectTool = action(toolState.set);
 
