@@ -1,7 +1,7 @@
 import { action } from 'awai';
 
-import { Layer, Point } from '../types';
-import { toolState, toolsConfigsFamily } from './state';
+import { Point } from '../types';
+import { lineConfigState, pencilConfigState, rectangleConfigState, toolState } from './state';
 
 export const startDrawingLine = action<[Point]>();
 
@@ -31,6 +31,8 @@ export const stopDrawing = action<[point: Point]>();
 
 export const selectTool = action(toolState.set);
 
-export const setToolConfig = action((tool: Layer['tool'], config: Layer['config']) => {
-  toolsConfigsFamily.getNode(tool).set(config);
-});
+export const setLineConfig = action(lineConfigState.set);
+
+export const setPencilConfig = action(pencilConfigState.set);
+
+export const setRectangleConfig = action(rectangleConfigState.set);

@@ -3,8 +3,6 @@ export interface Point {
   y: number;
 }
 
-export type ToolName = 'line' | 'background' | 'rectangle' | 'pencil';
-
 export interface BackgroundConfig {
   color: string;
 }

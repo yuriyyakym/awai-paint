@@ -2,14 +2,14 @@ import { scenario } from 'awai';
 
 import type { LineConfig } from '../../types';
 import { draw, startDrawingLine, stopDrawing } from '../actions';
-import { currentLayerState, toolsConfigsFamily } from '../state';
+import { currentLayerState, lineConfigState } from '../state';
 
 const TOOL_NAME = 'line';
 
 scenario(
   startDrawingLine.events.invoked,
   async ({ arguments: [point] }) => {
-    const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as LineConfig;
+    const config = lineConfigState.get();
 
     currentLayerState.set({
       tool: TOOL_NAME,

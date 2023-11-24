@@ -1,15 +1,14 @@
 import { scenario } from 'awai';
 
-import { RectangleConfig } from '../../types';
 import { draw, startDrawingRectangle, stopDrawing } from '../actions';
-import { currentLayerState, toolsConfigsFamily } from '../state';
+import { currentLayerState, rectangleConfigState } from '../state';
 
 const TOOL_NAME = 'rectangle';
 
 scenario(
   startDrawingRectangle.events.invoked,
   async ({ arguments: [point] }) => {
-    const config = toolsConfigsFamily.getNode(TOOL_NAME).get() as RectangleConfig;
+    const config = rectangleConfigState.get();
 
     currentLayerState.set({
       tool: TOOL_NAME,
