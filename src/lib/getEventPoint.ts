@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 
-import type { Point } from '../../types';
+import type { Point } from '../types';
 
 const getEventPoint = (event: MouseEvent<HTMLCanvasElement>): Point => {
   const { left, top } = event.currentTarget.getBoundingClientRect();
