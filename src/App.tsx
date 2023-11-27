@@ -5,22 +5,20 @@ import { canvasElementState, draw, startDrawing, stopDrawing } from './state';
 import Config from './modules/Config';
 import Tools from './modules/Tools';
 
-const App: FunctionComponent = () => {
-  return (
-    <div className="app">
-      <canvas
-        ref={canvasElementState.set}
-        width={800}
-        height={600}
-        onMouseDown={(event) => startDrawing(getEventPoint(event))}
-        onMouseMove={(event) => draw(getEventPoint(event))}
-        onMouseUp={(event) => stopDrawing(getEventPoint(event))}
-      />
+const App: FunctionComponent = () => (
+  <div className="app">
+    <canvas
+      ref={canvasElementState.set}
+      width={800}
+      height={600}
+      onMouseDown={(event) => startDrawing(getEventPoint(event))}
+      onMouseMove={(event) => draw(getEventPoint(event))}
+      onMouseUp={(event) => stopDrawing(getEventPoint(event))}
+    />
 
-      <Tools />
-      <Config />
-    </div>
-  );
-};
+    <Tools />
+    <Config />
+  </div>
+);
 
 export default App;
