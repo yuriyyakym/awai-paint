@@ -5,7 +5,7 @@ import { currentLayerState, lineConfigState } from '../state';
 
 const TOOL_NAME = 'line';
 
-scenario(startDrawingLine.events.invoked, async ({ arguments: [point] }) => {
+scenario(startDrawingLine.events.invoked, ({ arguments: [point] }) => {
   const config = lineConfigState.get();
 
   currentLayerState.set({
@@ -15,11 +15,7 @@ scenario(startDrawingLine.events.invoked, async ({ arguments: [point] }) => {
     config,
   });
 
-  scenario(
-    draw.events.invoked,
-    ({ arguments: [endPoint] }) => {
-      currentLayerState.set((layer) => ({ ...layer!, endPoint }));
-    },
-    { repeatUntil: stopDrawing.events.invoked },
-  );
+  scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
+    currentLayerState.set((layer) => ({ ...layer!, endPoint }));
+  });
 });

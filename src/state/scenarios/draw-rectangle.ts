@@ -5,7 +5,7 @@ import { currentLayerState, rectangleConfigState } from '../state';
 
 const TOOL_NAME = 'rectangle';
 
-scenario(startDrawingRectangle.events.invoked, async ({ arguments: [point] }) => {
+scenario(startDrawingRectangle.events.invoked, ({ arguments: [point] }) => {
   const config = rectangleConfigState.get();
 
   currentLayerState.set({
@@ -15,11 +15,7 @@ scenario(startDrawingRectangle.events.invoked, async ({ arguments: [point] }) =>
     config,
   });
 
-  scenario(
-    draw.events.invoked,
-    ({ arguments: [endPoint] }) => {
-      currentLayerState.set((layer) => ({ ...layer!, endPoint }));
-    },
-    { repeatUntil: stopDrawing.events.invoked },
-  );
+  scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
+    currentLayerState.set((layer) => ({ ...layer!, endPoint }));
+  });
 });
