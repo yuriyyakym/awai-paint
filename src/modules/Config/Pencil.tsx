@@ -2,12 +2,12 @@ import { useStateValue } from 'awai-react';
 import { type FunctionComponent } from 'react';
 
 import { pencilConfigState, setPencilConfig } from '../../state';
-import { type CurveConfig } from '../../types';
+import { type PencilConfig } from '../../types';
 
 const Pencil: FunctionComponent = () => {
   const config = useStateValue(pencilConfigState);
 
-  const handleConfigUpdate = (patch: Partial<CurveConfig>) => {
+  const handleConfigUpdate = (patch: Partial<PencilConfig>) => {
     setPencilConfig((config) => ({ ...config, ...patch }));
   };
 

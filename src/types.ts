@@ -23,6 +23,8 @@ export interface CurveConfig {
   lineWidth: number;
 }
 
+export interface PencilConfig extends CurveConfig {}
+
 export interface Background {
   tool: 'background';
   config: BackgroundConfig;

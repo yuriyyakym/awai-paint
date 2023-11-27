@@ -1,4 +1,4 @@
-import { BackgroundConfig, CurveConfig, LineConfig, RectangleConfig } from '../types';
+import { BackgroundConfig, LineConfig, PencilConfig, RectangleConfig } from '../types';
 
 export const DEFAULT_BACKGROUND_CONFIG: BackgroundConfig = {
   color: '#ffffff',
@@ -15,7 +15,7 @@ export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   color: '#ddffff',
 };
 
-export const DEFAULT_PENCIL_CONFIG: CurveConfig = {
+export const DEFAULT_PENCIL_CONFIG: PencilConfig = {
   color: '#dd0000',
   lineWidth: 1,
 };

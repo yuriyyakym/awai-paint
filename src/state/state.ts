@@ -1,5 +1,5 @@
 import { state } from 'awai';
-import { Background, CurveConfig, Layer, LineConfig, RectangleConfig } from '../types';
+import { Background, Layer, LineConfig, PencilConfig, RectangleConfig } from '../types';
 import {
   DEFAULT_BACKGROUND_CONFIG,
   DEFAULT_LINE_CONFIG,
@@ -18,7 +18,7 @@ export const toolState = state<'line' | 'rectangle' | 'pencil'>('pencil');
 
 export const lineConfigState = state<LineConfig>(DEFAULT_LINE_CONFIG);
 
-export const pencilConfigState = state<CurveConfig>(DEFAULT_PENCIL_CONFIG);
+export const pencilConfigState = state<PencilConfig>(DEFAULT_PENCIL_CONFIG);
 
 export const rectangleConfigState = state<RectangleConfig>(DEFAULT_RECTANGLE_CONFIG);
 
