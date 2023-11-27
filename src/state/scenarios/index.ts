@@ -1,4 +1,4 @@
-import './paint';
+import './render';
 import './draw-finish';
 import './draw-line';
 import './draw-pencil';

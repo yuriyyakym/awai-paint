@@ -15,7 +15,7 @@ scenario(
     const canvas = canvasElementState.get();
     const context = canvas?.getContext('2d');
 
-    if (!canvas || !context) {
+    if (!context) {
       return;
     }
 
@@ -24,7 +24,10 @@ scenario(
     for (const layer of layers) {
       if (layer.tool === 'background') {
         const startPoint: Point = { x: 0, y: 0 };
-        const endPoint: Point = { x: Number.MAX_SAFE_INTEGER, y: Number.MAX_SAFE_INTEGER };
+        const endPoint: Point = {
+          x: Number.MAX_SAFE_INTEGER,
+          y: Number.MAX_SAFE_INTEGER,
+        };
         drawRectangle(context, startPoint, endPoint, layer.config);
       }
 
