@@ -1,6 +1,6 @@
 import { scenario } from 'awai';
 
-import type { Layer, Point } from '../../types';
+import type { Layer } from '../../types';
 import { drawCurve, drawLine, drawRectangle } from '../lib';
 import { canvasElementState, currentLayerState, layersState } from '../state';
 
@@ -19,18 +19,11 @@ scenario(
       return;
     }
 
+    context.clearRect(0, 0, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+
     const layers = [...layersState.get(), currentLayerState.get()].filter(Boolean) as Layer[];
 
     for (const layer of layers) {
-      if (layer.tool === 'background') {
-        const startPoint: Point = { x: 0, y: 0 };
-        const endPoint: Point = {
-          x: Number.MAX_SAFE_INTEGER,
-          y: Number.MAX_SAFE_INTEGER,
-        };
-        drawRectangle(context, startPoint, endPoint, layer.config);
-      }
-
       if (layer.tool === 'line') {
         const { config, endPoint, startPoint } = layer;
         drawLine(context, startPoint, endPoint, config);

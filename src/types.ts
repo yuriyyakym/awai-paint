@@ -3,10 +3,6 @@ export interface Point {
   y: number;
 }
 
-export interface BackgroundConfig {
-  color: string;
-}
-
 export interface LineConfig {
   color: string;
   lineWidth: number;
@@ -24,11 +20,6 @@ export interface CurveConfig {
 }
 
 export interface PencilConfig extends CurveConfig {}
-
-export interface Background {
-  tool: 'background';
-  config: BackgroundConfig;
-}
 
 export interface Line {
   tool: 'line';
@@ -50,4 +41,4 @@ export interface Pencil {
   points: Point[];
 }
 
-export type Layer = Background | Line | Rectangle | Pencil;
+export type Layer = Line | Rectangle | Pencil;

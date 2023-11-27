@@ -1,16 +1,6 @@
 import { state } from 'awai';
-import { Background, Layer, LineConfig, PencilConfig, RectangleConfig } from '../types';
-import {
-  DEFAULT_BACKGROUND_CONFIG,
-  DEFAULT_LINE_CONFIG,
-  DEFAULT_PENCIL_CONFIG,
-  DEFAULT_RECTANGLE_CONFIG,
-} from './constants';
-
-const BACKGROUND_LAYER: Background = {
-  tool: 'background',
-  config: DEFAULT_BACKGROUND_CONFIG,
-};
+import { Layer, LineConfig, PencilConfig, RectangleConfig } from '../types';
+import { DEFAULT_LINE_CONFIG, DEFAULT_PENCIL_CONFIG, DEFAULT_RECTANGLE_CONFIG } from './constants';
 
 export const canvasElementState = state<HTMLCanvasElement | null>(null);
 
@@ -22,6 +12,6 @@ export const pencilConfigState = state<PencilConfig>(DEFAULT_PENCIL_CONFIG);
 
 export const rectangleConfigState = state<RectangleConfig>(DEFAULT_RECTANGLE_CONFIG);
 
-export const layersState = state<Layer[]>([BACKGROUND_LAYER]);
+export const layersState = state<Layer[]>([]);
 
 export const currentLayerState = state<Layer | null>(null);
