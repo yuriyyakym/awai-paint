@@ -5,6 +5,7 @@ body {
 canvas {
   display: block;
   border: 1px dashed #333;
+  background-color: #fff;
 }
 
 .app {
