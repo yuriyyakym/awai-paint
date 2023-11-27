@@ -9,21 +9,7 @@ export const startDrawingPencil = action<[Point]>();
 
 export const startDrawingRectangle = action<[Point]>();
 
-export const startDrawing = action((point: Point) => {
-  const tool = toolState.get();
-
-  if (tool === 'line') {
-    startDrawingLine(point);
-  }
-
-  if (tool === 'pencil') {
-    startDrawingPencil(point);
-  }
-
-  if (tool === 'rectangle') {
-    startDrawingRectangle(point);
-  }
-});
+export const startDrawing = action<[Point]>();
 
 export const draw = action<[point: Point]>();
 
