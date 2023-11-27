@@ -1,6 +1,22 @@
-import { state } from 'awai';
-import { Layer, LineConfig, PencilConfig, RectangleConfig } from '../types';
-import { DEFAULT_LINE_CONFIG, DEFAULT_PENCIL_CONFIG, DEFAULT_RECTANGLE_CONFIG } from './constants';
+import { selector, state } from 'awai';
+
+import {
+  Layer,
+  Line,
+  LineConfig,
+  Pencil,
+  PencilConfig,
+  Rectangle,
+  RectangleConfig,
+} from '../types';
+import {
+  DEFAULT_LINE_CONFIG,
+  DEFAULT_PENCIL_CONFIG,
+  DEFAULT_RECTANGLE_CONFIG,
+  EMPTY_LINE_LAYER,
+  EMPTY_PENCIL_LAYER,
+  EMPTY_RECTANGLE_LAYER,
+} from './constants';
 
 export const canvasElementState = state<HTMLCanvasElement | null>(null);
 
@@ -14,4 +30,23 @@ export const rectangleConfigState = state<RectangleConfig>(DEFAULT_RECTANGLE_CON
 
 export const layersState = state<Layer[]>([]);
 
-export const currentLayerState = state<Layer | null>(null);
+export const currentLineLayerState = state<Line>(EMPTY_LINE_LAYER);
+
+export const currentRectangleLayerState = state<Rectangle>(EMPTY_RECTANGLE_LAYER);
+
+export const currentPencilLayerState = state<Pencil>(EMPTY_PENCIL_LAYER);
+
+export const currentToolLayerState = selector(
+  [toolState, currentLineLayerState, currentRectangleLayerState, currentPencilLayerState],
+  (tool, lineLayer, rectangleLayer, pencilLayer): Layer => {
+    if (tool === 'line') {
+      return lineLayer;
+    }
+
+    if (tool === 'pencil') {
+      return pencilLayer;
+    }
+
+    return rectangleLayer;
+  },
+);

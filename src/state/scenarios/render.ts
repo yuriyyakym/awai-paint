@@ -1,14 +1,13 @@
 import { scenario } from 'awai';
 
-import type { Layer } from '../../types';
 import { drawCurve, drawLine, drawRectangle } from '../lib';
-import { canvasElementState, currentLayerState, layersState } from '../state';
+import { canvasElementState, currentToolLayerState, layersState } from '../state';
 
 scenario(
   () =>
     Promise.race([
       canvasElementState.events.changed,
-      currentLayerState.events.changed,
+      currentToolLayerState.events.changed,
       layersState.events.changed,
     ]),
   () => {
@@ -21,7 +20,7 @@ scenario(
 
     context.clearRect(0, 0, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
-    const layers = [...layersState.get(), currentLayerState.get()].filter(Boolean) as Layer[];
+    const layers = [...layersState.get(), currentToolLayerState.get()];
 
     for (const layer of layers) {
       if (layer.tool === 'line') {
