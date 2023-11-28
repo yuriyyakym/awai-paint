@@ -1,4 +1,4 @@
-import { selector, state } from 'awai';
+import { state } from 'awai';
 
 import {
   Layer,
@@ -35,18 +35,3 @@ export const currentLineLayerState = state<Line>(EMPTY_LINE_LAYER);
 export const currentRectangleLayerState = state<Rectangle>(EMPTY_RECTANGLE_LAYER);
 
 export const currentPencilLayerState = state<Pencil>(EMPTY_PENCIL_LAYER);
-
-export const currentToolLayerState = selector(
-  [toolState, currentLineLayerState, currentRectangleLayerState, currentPencilLayerState],
-  (tool, lineLayer, rectangleLayer, pencilLayer): Layer => {
-    if (tool === 'line') {
-      return lineLayer;
-    }
-
-    if (tool === 'pencil') {
-      return pencilLayer;
-    }
-
-    return rectangleLayer;
-  },
-);
