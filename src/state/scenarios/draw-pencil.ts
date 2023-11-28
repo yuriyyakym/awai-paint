@@ -1,23 +1,32 @@
 import { scenario } from 'awai';
 
 import { draw, startDrawingPencil, stopDrawing } from '../actions';
-import { currentPencilLayerState, pencilConfigState } from '../state';
+import { EMPTY_PENCIL_LAYER } from '../constants';
+import { currentPencilLayerState, layersState, pencilConfigState } from '../state';
 
-const TOOL_NAME = 'pencil';
-
-scenario(startDrawingPencil.events.invoked, ({ arguments: [point] }) => {
+scenario(startDrawingPencil.events.invoked, async ({ arguments: [point] }) => {
   const config = pencilConfigState.get();
 
   currentPencilLayerState.set({
-    tool: TOOL_NAME,
+    tool: 'pencil',
     points: [point],
     config,
   });
 
-  scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [point] }) => {
-    currentPencilLayerState.set((layer) => ({
-      ...layer,
-      points: [...layer.points, point],
-    }));
-  });
+  const drawingScenario = scenario(
+    draw.events.invoked,
+    stopDrawing.events.invoked,
+    ({ arguments: [point] }) => {
+      currentPencilLayerState.set((layer) => ({
+        ...layer,
+        points: [...layer.points, point],
+      }));
+    },
+  );
+
+  await drawingScenario.events.expired;
+
+  layersState.set((layers) => [...layers, currentPencilLayerState.get()]);
+
+  currentPencilLayerState.set(EMPTY_PENCIL_LAYER);
 });

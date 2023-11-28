@@ -1,21 +1,30 @@
 import { scenario } from 'awai';
 
 import { draw, startDrawingRectangle, stopDrawing } from '../actions';
-import { currentRectangleLayerState, rectangleConfigState } from '../state';
+import { EMPTY_RECTANGLE_LAYER } from '../constants';
+import { currentRectangleLayerState, layersState, rectangleConfigState } from '../state';
 
-const TOOL_NAME = 'rectangle';
-
-scenario(startDrawingRectangle.events.invoked, ({ arguments: [point] }) => {
+scenario(startDrawingRectangle.events.invoked, async ({ arguments: [point] }) => {
   const config = rectangleConfigState.get();
 
   currentRectangleLayerState.set({
-    tool: TOOL_NAME,
+    tool: 'rectangle',
     startPoint: point,
     endPoint: point,
     config,
   });
 
-  scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
-    currentRectangleLayerState.set((layer) => ({ ...layer, endPoint }));
-  });
+  const drawingScenario = scenario(
+    draw.events.invoked,
+    stopDrawing.events.invoked,
+    ({ arguments: [endPoint] }) => {
+      currentRectangleLayerState.set((layer) => ({ ...layer, endPoint }));
+    },
+  );
+
+  await drawingScenario.events.expired;
+
+  layersState.set((layers) => [...layers, currentRectangleLayerState.get()]);
+
+  currentRectangleLayerState.set(EMPTY_RECTANGLE_LAYER);
 });

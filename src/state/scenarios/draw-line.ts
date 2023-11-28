@@ -1,21 +1,30 @@
 import { scenario } from 'awai';
 
 import { draw, startDrawingLine, stopDrawing } from '../actions';
-import { currentLineLayerState, lineConfigState } from '../state';
+import { EMPTY_LINE_LAYER } from '../constants';
+import { currentLineLayerState, layersState, lineConfigState } from '../state';
 
-const TOOL_NAME = 'line';
-
-scenario(startDrawingLine.events.invoked, ({ arguments: [point] }) => {
+scenario(startDrawingLine.events.invoked, async ({ arguments: [point] }) => {
   const config = lineConfigState.get();
 
   currentLineLayerState.set({
-    tool: TOOL_NAME,
+    tool: 'line',
     startPoint: point,
     endPoint: point,
     config,
   });
 
-  scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
-    currentLineLayerState.set((layer) => ({ ...layer, endPoint }));
-  });
+  const drawingScenario = scenario(
+    draw.events.invoked,
+    stopDrawing.events.invoked,
+    ({ arguments: [endPoint] }) => {
+      currentLineLayerState.set((layer) => ({ ...layer, endPoint }));
+    },
+  );
+
+  await drawingScenario.events.expired;
+
+  layersState.set((layers) => [...layers, currentLineLayerState.get()]);
+
+  currentLineLayerState.set(EMPTY_LINE_LAYER);
 });
