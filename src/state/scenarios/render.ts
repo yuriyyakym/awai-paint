@@ -18,7 +18,7 @@ scenario(
       return;
     }
 
-    context.clearRect(0, 0, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
     const layers = [...layersState.get(), currentToolLayerState.get()];
 
