@@ -50,8 +50,6 @@ scenario(
         const { config, endPoint, startPoint } = layer;
         drawRectangle(context, startPoint, endPoint, config);
       }
-
-      throw new Error(`Rendering of "${layer.tool} is not handled"`);
     }
   },
 );
