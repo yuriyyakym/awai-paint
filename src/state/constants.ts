@@ -1,19 +1,19 @@
 import { Line, LineConfig, Pencil, PencilConfig, Rectangle, RectangleConfig } from '../types';
 
 export const DEFAULT_LINE_CONFIG: LineConfig = {
-  color: '#dd0000',
-  lineWidth: 1,
+  color: '#1aa1db',
+  lineWidth: 5,
 };
 
 export const DEFAULT_RECTANGLE_CONFIG: RectangleConfig = {
   borderColor: '#333333',
-  borderWidth: 1,
-  color: '#ddffff',
+  borderWidth: 5,
+  color: '#fff5b8',
 };
 
 export const DEFAULT_PENCIL_CONFIG: PencilConfig = {
-  color: '#dd0000',
-  lineWidth: 1,
+  color: '#1aa1db',
+  lineWidth: 5,
 };
 
 export const EMPTY_LINE_LAYER: Line = {
