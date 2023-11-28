@@ -1,5 +1,5 @@
 import './render';
-import './draw-start';
+import './start-drawing';
 import './draw-line';
 import './draw-pencil';
 import './draw-rectangle';
