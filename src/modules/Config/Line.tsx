@@ -5,7 +5,7 @@ import { lineConfigState, setLineConfig } from '../../state';
 import { type LineConfig } from '../../types';
 
 const Line: FunctionComponent = () => {
-  const config = useStateValue(lineConfigState);
+  const { color, lineWidth } = useStateValue(lineConfigState);
 
   const handleConfigUpdate = (patch: Partial<LineConfig>) => {
     setLineConfig((config) => ({ ...config, ...patch }));
@@ -17,7 +17,7 @@ const Line: FunctionComponent = () => {
         <input
           type="color"
           onChange={(event) => handleConfigUpdate({ color: event.target.value })}
-          value={config.color}
+          value={color}
         />
         Color
       </label>
@@ -28,7 +28,7 @@ const Line: FunctionComponent = () => {
           min={0}
           max={50}
           onChange={(event) => handleConfigUpdate({ lineWidth: parseInt(event.target.value, 10) })}
-          value={config.lineWidth}
+          value={lineWidth}
         />
         Line width
       </label>

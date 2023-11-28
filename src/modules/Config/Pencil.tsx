@@ -5,7 +5,7 @@ import { pencilConfigState, setPencilConfig } from '../../state';
 import { type PencilConfig } from '../../types';
 
 const Pencil: FunctionComponent = () => {
-  const config = useStateValue(pencilConfigState);
+  const { color, lineWidth } = useStateValue(pencilConfigState);
 
   const handleConfigUpdate = (patch: Partial<PencilConfig>) => {
     setPencilConfig((config) => ({ ...config, ...patch }));
@@ -17,7 +17,7 @@ const Pencil: FunctionComponent = () => {
         <input
           type="color"
           onChange={(event) => handleConfigUpdate({ color: event.target.value })}
-          value={config.color}
+          value={color}
         />
         Color
       </label>
@@ -28,7 +28,7 @@ const Pencil: FunctionComponent = () => {
           min={0}
           max={50}
           onChange={(event) => handleConfigUpdate({ lineWidth: parseInt(event.target.value, 10) })}
-          value={config.lineWidth}
+          value={lineWidth}
         />
         Line width
       </label>

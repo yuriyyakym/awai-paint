@@ -5,7 +5,7 @@ import { rectangleConfigState, setRectangleConfig } from '../../state';
 import { RectangleConfig } from '../../types';
 
 const Rectangle: FunctionComponent = () => {
-  const config = useStateValue(rectangleConfigState);
+  const { borderColor, borderWidth, color } = useStateValue(rectangleConfigState);
 
   const handleConfigUpdate = (patch: Partial<RectangleConfig>) => {
     setRectangleConfig((config) => ({ ...config, ...patch }));
@@ -17,7 +17,7 @@ const Rectangle: FunctionComponent = () => {
         <input
           type="color"
           onChange={(event) => handleConfigUpdate({ color: event.target.value })}
-          value={config.color}
+          value={color}
         />
         Color
       </label>
@@ -26,7 +26,7 @@ const Rectangle: FunctionComponent = () => {
         <input
           type="color"
           onChange={(event) => handleConfigUpdate({ borderColor: event.target.value })}
-          value={config.borderColor}
+          value={borderColor}
         />
         Border color
       </label>
@@ -39,7 +39,7 @@ const Rectangle: FunctionComponent = () => {
           onChange={(event) =>
             handleConfigUpdate({ borderWidth: parseInt(event.target.value, 10) })
           }
-          value={config.borderWidth}
+          value={borderWidth}
         />
         Border width
       </label>
