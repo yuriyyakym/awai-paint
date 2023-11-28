@@ -22,4 +22,6 @@ scenario(startDrawing.events.invoked, ({ arguments: [point] }) => {
   if (tool === 'rectangle') {
     startDrawingRectangle(point);
   }
+
+  throw new Error(`Tool "${tool}" is not handled`);
 });
