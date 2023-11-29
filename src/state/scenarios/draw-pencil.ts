@@ -13,20 +13,13 @@ scenario(startDrawingPencil.events.invoked, async ({ arguments: [point] }) => {
     config,
   });
 
-  const drawingScenario = scenario(
-    draw.events.invoked,
-    stopDrawing.events.invoked,
-    ({ arguments: [point] }) => {
-      currentPencilLayerState.set((layer) => ({
-        ...layer,
-        points: [...layer.points, point],
-      }));
-    },
-  );
-
-  await drawingScenario.events.expired;
+  await scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [point] }) => {
+    currentPencilLayerState.set((layer) => ({
+      ...layer,
+      points: [...layer.points, point],
+    }));
+  });
 
   layersState.set((layers) => [...layers, currentPencilLayerState.get()]);
-
   currentPencilLayerState.set(EMPTY_PENCIL_LAYER);
 });

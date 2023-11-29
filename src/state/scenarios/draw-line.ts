@@ -14,17 +14,10 @@ scenario(startDrawingLine.events.invoked, async ({ arguments: [point] }) => {
     config,
   });
 
-  const drawingScenario = scenario(
-    draw.events.invoked,
-    stopDrawing.events.invoked,
-    ({ arguments: [endPoint] }) => {
-      currentLineLayerState.set((layer) => ({ ...layer, endPoint }));
-    },
-  );
-
-  await drawingScenario.events.expired;
+  await scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
+    currentLineLayerState.set((layer) => ({ ...layer, endPoint }));
+  });
 
   layersState.set((layers) => [...layers, currentLineLayerState.get()]);
-
   currentLineLayerState.set(EMPTY_LINE_LAYER);
 });

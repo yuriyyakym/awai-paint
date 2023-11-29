@@ -14,17 +14,10 @@ scenario(startDrawingRectangle.events.invoked, async ({ arguments: [point] }) =>
     config,
   });
 
-  const drawingScenario = scenario(
-    draw.events.invoked,
-    stopDrawing.events.invoked,
-    ({ arguments: [endPoint] }) => {
-      currentRectangleLayerState.set((layer) => ({ ...layer, endPoint }));
-    },
-  );
-
-  await drawingScenario.events.expired;
+  await scenario(draw.events.invoked, stopDrawing.events.invoked, ({ arguments: [endPoint] }) => {
+    currentRectangleLayerState.set((layer) => ({ ...layer, endPoint }));
+  });
 
   layersState.set((layers) => [...layers, currentRectangleLayerState.get()]);
-
   currentRectangleLayerState.set(EMPTY_RECTANGLE_LAYER);
 });
