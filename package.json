@@ -1,9 +1,11 @@
 {
   "name": "awai-paint",
   "author": "Yuriy Yakym",
-  "version": "0.0.0",
+  "description": "",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "module",
+  "keywords": ["awai", "awai-react", "typescript", "react"],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build"
