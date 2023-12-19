@@ -1,6 +1,6 @@
 # Awai - Paint
 
-### [Demo](https://awai-paint.vercel.app)
+### [Demo](https://awai-paint.vercel.app) | [Playground](https://codesandbox.io/p/github/yuriyyakym/awai-paint/master)
 
 _Complexity: Medium_
 
