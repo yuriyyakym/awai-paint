@@ -21,5 +21,5 @@ This project is also a proof that Awai works great with real-time actions.
     - [draw-line.ts](./src/state/scenarios/draw-line.ts)
     - [draw-pencil.ts](./src/state/scenarios/draw-pencil.ts)
     - [draw-rectangle.ts](./src/state/scenarios/draw-rectangle.ts)
-    - [rerender.ts](./src/state/scenarios/rerender.ts)
+    - [render.ts](./src/state/scenarios/render.ts)
     - [start-drawing.ts](./src/state/scenarios/start-drawing.ts)
