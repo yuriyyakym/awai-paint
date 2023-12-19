@@ -9,8 +9,8 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "awai": "^1.0.0-alpha-1",
-    "awai-react": "^0.0.1-alpha-5",
+    "awai": "^1.0.0-alpha-5",
+    "awai-react": "^0.0.1-alpha-8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
