@@ -8,7 +8,7 @@ _Uses: [State](https://awai.js.org/state), [Action](https://awai.js.org/action),
 
 ---
 
-Basic painting application implementation to demonstrate how write logics declaratively by composing actions and scenarios using [Awai](https://awai.js.org) state management library.
+Basic painting application implementation to demonstrate how to write logics declaratively by composing actions and scenarios using [Awai](https://awai.js.org) state management library.
 
 This project is also a proof that Awai works great with real-time actions.
 
