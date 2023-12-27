@@ -4,7 +4,7 @@
 
 _Complexity: Medium_
 
-_Uses: [State](https://awai.js.org/state), [Action](https://awai.js.org/action), [Action](https://awai.js.org/scenario)_
+_Uses: [State](https://awai.js.org/state), [Action](https://awai.js.org/action), [Scenario](https://awai.js.org/scenario)_
 
 ---
 
